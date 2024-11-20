@@ -5,42 +5,32 @@ This microservice processes reservation data for a hotel management system. It c
 
 ---
 
-## Features
-- Accepts JSON input containing reservation data.
-- Returns a JSON response categorizing rooms into:
-  - `checked-in`: Rooms with a check-out date of today but are still marked as "checked-in."
-  - `checked-out`: Rooms with a check-out date of today and are already checked out.
+## Communication Contract
+
+### Contact Information
+If you have any issues with this microservice, you can reach me via **text**.  
+**Availability**: Weekdays 5-9 PM, Weekends anytime.
 
 ---
 
-## Endpoint
-### `/check_rooms`
-**Method**: POST  
-**Description**: Processes reservation data and categorizes rooms.
+### Example Request
+Here is an example `curl` command for the endpoint running on **port 5001**:
+
+**POST Call**:
+curl -X POST -H "Content-Type: application/json" -d @sample_input.json http://127.0.0.1:5001/check_rooms
 
 ---
 
-## Input Example
-Send a POST request with the following JSON data:
+## Output Example
 
-```json
 [
     {
-        "_id": "1",
-        "lastName": "Doe",
-        "firstName": "Jane",
-        "checkInDate": "2024-11-07",
-        "checkOutDate": "2024-11-17",
-        "roomNumber": "102",
-        "checkedIn": false
-    },
-    {
-        "_id": "2",
-        "lastName": "Smith",
-        "firstName": "John",
-        "checkInDate": "2024-11-10",
-        "checkOutDate": "2024-11-17",
-        "roomNumber": "203",
-        "checkedIn": true
+    "checked-in": ["203"],
+    "checked-out": ["102"]
     }
 ]
+
+---
+
+## UML Sequence Diagram
+![Hotel Management Microservice](https://github.com/user-attachments/assets/127764f5-8391-470d-8cda-17b58632d6a1)
