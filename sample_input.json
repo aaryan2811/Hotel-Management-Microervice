@@ -1,0 +1,22 @@
+[
+    {
+        "_id": "9fa5618e-75d8-43f3-9ce4-3a70c131c90f",
+        "lastName": "Doe",
+        "firstName": "Jane",
+        "checkInDate": "2024-11-07",
+        "checkOutDate": "2024-11-19",
+        "roomNumber": "102",
+        "checkedIn": false,
+        "numofGuests": 2
+    },
+    {
+        "_id": "8be9b17c-19b4-4bc7-83c7-90f78a8bc915",
+        "lastName": "Smith",
+        "firstName": "John",
+        "checkInDate": "2024-11-06",
+        "checkOutDate": "2024-11-19",
+        "roomNumber": "203",
+        "checkedIn": true,
+        "numofGuests": 1
+    }
+]
