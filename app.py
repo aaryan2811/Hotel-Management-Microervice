@@ -1,33 +1,29 @@
 from flask import Flask, request, jsonify
-from datetime import date
+import datetime
 
 app = Flask(__name__)
 
 @app.route('/check_rooms', methods=['POST'])
 def check_rooms():
-    # Get the JSON data from the request
     reservations = request.json
-    
-    # Get today's date in the same format as the input data
-    today = date.today().isoformat()
-    
-    # Initialize the result dictionary
-    result = {
-        "checked-in": [],
-        "checked-out": []
-    }
-    
-    # Process each reservation
+    if not reservations:
+        return jsonify({"error": "No data provided or invalid JSON format"}), 400
+
+    today = datetime.date.today().isoformat()
+    result = {"checked-in": [], "checked-out": []}
+
     for reservation in reservations:
+        if not all(key in reservation for key in ["checkOutDate", "roomNumber", "checkedIn"]):
+            return jsonify({"error": "Invalid reservation format"}), 400
+
         if reservation.get("checkOutDate") == today:
             room_number = reservation.get("roomNumber")
-            if reservation.get("checkedIn"):  # True -> checked-in
+            if reservation.get("checkedIn"):
                 result["checked-in"].append(room_number)
-            else:  # False -> checked-out
+            else:
                 result["checked-out"].append(room_number)
-    
-    # Return the result as JSON
+
     return jsonify(result)
 
 if __name__ == '__main__':
-    app.run(debug=True, port = 5001)
+    app.run(debug=True, port=5001)
